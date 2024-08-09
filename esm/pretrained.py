@@ -12,7 +12,7 @@ from pathlib import Path
 import torch
 
 import esm
-from esm.model.esm2 import ESM2
+from esm.model.esm2_mech_intepret import ESM2
 
 
 def _has_regression_weights(model_name):
