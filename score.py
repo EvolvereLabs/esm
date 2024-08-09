@@ -64,11 +64,13 @@ def compute_log_likelihoods(model: torch.nn.Module, batch_tokens: torch.Tensor, 
         logits = model(batch_tokens)["logits"]
         logging.info(f"Logits shape: {logits.shape}")
         log_probs = torch.log_softmax(logits, dim=-1)
-        loggings.info(f"Log probs shape: {log_probs.shape}")
+        logging.info(f"Log probs shape: {log_probs.shape}")
+        logging.info(log_probs)
         log_likelihoods = log_probs.gather(2, batch_tokens.unsqueeze(-1)).squeeze(-1)
-        loggings.info(f"Log likelihoods shape: {log_likelihoods.shape}")
+        logging.info(f"Log likelihoods shape: {log_likelihoods.shape}")
+        logging.info(log_likelihoods)
         log_likelihoods = log_likelihoods.sum(dim=1).cpu().numpy()
-        loggings.info(f"Log likelihoods shape: {log_likelihoods.shape}")
+        logging.info(f"Log likelihoods shape: {log_likelihoods.shape}")
     return log_likelihoods
 
 def main(args):
